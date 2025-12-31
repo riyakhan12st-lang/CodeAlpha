@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <title> Gallery </title>
+    <link href="style.css" rel="stylesheet">
+  
+  </head>
+  <body>
+    <h1> My Image Gallery</h1>
+    <p class="subtitles">
+      Responsive Image Gallery with Filters and Lightbox
+    </p>
+    
+    <!--------Filter Buttons-------->
+    <div class="filters">
+      <button onclick="filterImages('all')">All</button>
+      <button onclick="filterImages('nature')">Nature</button>
+      <button onclick="filterImages('animal')">Animal</button>
+      <button onclick="filterImages('city')">City</button>
+      <button onclick="filterImages('technology')">Technology</button>
+      <button onclick="filterImages('people')">People</button>
+    </div>
+    
+    <!--------Image Gallery--------->
+    <div class="gallery">
+     
+      <!--- Nature--->
+      <img src="https://picsum.photos/id/1015/600/400" data-category="nature" onclick="openLightbox(0)" >
+      <img src="https://picsum.photos/id/1016/600/400" data-category="nature" onclick="openLightbox(1)" >
+      <img src="https://picsum.photos/id/1020/600/400" data-category="nature" onclick="openLightbox(2)" >
+      <img src="https://picsum.photos/id/1024/600/400" data-category="nature" onclick="openLightbox(3)" >
+      
+      <!---Animals--->
+      <img src="https://picsum.photos/id/237/600/400" data-category="animal" onclick="openLightbox(4)">
+      <img src="https://picsum.photos/id/219/600/400" data-category="animal" onclick="openLightbox(5)">
+      <img src="https://picsum.photos/id/593/600/400" data-category="animal" onclick="openLightbox(6)">
+      <img src="https://picsum.photos/id/169/600/400" data-category="animal" onclick="openLightbox(7)">
+      
+      <!---City--->
+      <img src="https://picsum.photos/id/1067/600/400" data-category="city" onclick="openLightbox(8)">
+      <img src="https://picsum.photos/id/1047/600/400" data-category="city" onclick="openLightbox(9)">
+      <img src="https://picsum.photos/id/1031/600/400" data-category="city" onclick="openLightbox(10)">
+      <img src="https://picsum.photos/id/1042/600/400" data-category="city" onclick="openLightbox(11)">
+      
+      <!-- TECHNOLOGY -->
+    <img src="https://picsum.photos/id/180/600/400" data-category="technology" onclick="openLightbox(12)">
+    <img src="https://picsum.photos/id/201/600/400" data-category="technology" onclick="openLightbox(13)">
+    <img src="https://picsum.photos/id/1/600/400" data-category="technology" onclick="openLightbox(14)">
+    <img src="https://picsum.photos/id/60/600/400" data-category="technology" onclick="openLightbox(15)">
+
+    <!-- PEOPLE -->
+    <img src="https://picsum.photos/id/1005/600/400" data-category="people" onclick="openLightbox(16)">
+    <img src="https://picsum.photos/id/1027/600/400" data-category="people" onclick="openLightbox(17)">
+    <img src="https://picsum.photos/id/64/600/400" data-category="people" onclick="openLightbox(18)">
+    <img src="https://picsum.photos/id/1011/600/400" data-category="people" onclick="openLightbox(19)">
+    </div>
+    
+    
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+    <span class="close" onclick="closeLightbox()">×</span>
+    <span class="prev" onclick="changeImage(-1)">❮</span>
+    <img id="lightboxImg">
+    <span class="next" onclick="changeImage(1)">❯</span>
+</div>
+
+<script>
+  let images = document.querySelectorAll(".gallery img");
+let lightbox = document.getElementById("lightbox");
+let lightboxImg = document.getElementById("lightboxImg");
+let currentIndex = 0;
+
+/* OPEN LIGHTBOX */
+function openLightbox(index) {
+    currentIndex = index;
+    lightbox.style.display = "flex";
+    lightboxImg.src = images[currentIndex].src;
+}
+
+/* CLOSE LIGHTBOX */
+function closeLightbox() {
+    lightbox.style.display = "none";
+}
+
+/* NEXT / PREV */
+function changeImage(step) {
+    currentIndex += step;
+
+    if (currentIndex < 0) {
+        currentIndex = images.length - 1;
+    }
+    if (currentIndex >= images.length) {
+        currentIndex = 0;
+    }
+
+    lightboxImg.src = images[currentIndex].src;
+}
+
+/* FILTER */
+function filterImages(category) {
+    images.forEach(img => {
+        if (category === "all" || img.dataset.category === category) {
+            img.style.display = "block";
+        } else {
+            img.style.display = "none";
+        }
+    });
+}
+</script>
+  </body>
+</html>
