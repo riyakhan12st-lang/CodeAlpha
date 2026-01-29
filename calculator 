@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculator</title>
+
+  <style>
+    body {
+      background: #e6e6e6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+
+    .calculator {
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+      width: 270px;
+    }
+
+    .screen {
+      width: 100%;
+      height: 55px;
+      font-size: 24px;
+      text-align: right;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      background: #111;
+      color: #00e5ff; /* typing color */
+      box-sizing: border-box;
+      margin-bottom: 15px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      height: 45px;
+      font-size: 18px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .number {
+      background: #f2f2f2;
+    }
+
+    .operator {
+      background: #ff9800;
+      color: white;
+    }
+
+    .clear {
+      background: #f44336;
+      color: white;
+    }
+
+    .equal {
+      background: #4caf50;
+      color: white;
+      grid-column: span 2;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="calculator">
+    <input type="text" id="display" class="screen" disabled>
+
+    <div class="buttons">
+      <button class="clear" onclick="clearDisplay()">C</button>
+      <button class="operator" onclick="deleteOne()">⌫</button>
+      <button class="operator" onclick="addValue('/')">÷</button>
+      <button class="operator" onclick="addValue('*')">×</button>
+
+      <button class="number" onclick="addValue('7')">7</button>
+      <button class="number" onclick="addValue('8')">8</button>
+      <button class="number" onclick="addValue('9')">9</button>
+      <button class="operator" onclick="addValue('-')">−</button>
+
+      <button class="number" onclick="addValue('4')">4</button>
+      <button class="number" onclick="addValue('5')">5</button>
+      <button class="number" onclick="addValue('6')">6</button>
+      <button class="operator" onclick="addValue('+')">+</button>
+
+      <button class="number" onclick="addValue('1')">1</button>
+      <button class="number" onclick="addValue('2')">2</button>
+      <button class="number" onclick="addValue('3')">3</button>
+
+      <button class="number" onclick="addValue('0')">0</button>
+      <button class="number" onclick="addValue('.')">.</button>
+      <button class="equal" onclick="calculate()">=</button>
+    </div>
+  </div>
+
+  <script>
+    function addValue(value) {
+      let display = document.getElementById("display");
+      display.value += value;
+      display.style.color = "#00e5ff"; // typing color
+    }
+
+    function clearDisplay() {
+      let display = document.getElementById("display");
+      display.value = "";
+      display.style.color = "#00e5ff";
+    }
+
+    function deleteOne() {
+      let display = document.getElementById("display");
+      display.value = display.value.slice(0, -1);
+      display.style.color = "#00e5ff";
+    }
+
+    function calculate() {
+      let display = document.getElementById("display");
+      display.value = eval(display.value);
+      display.style.color = "#4caf50"; // result color
+    }
+  </script>
+
+</body>
+</html>
